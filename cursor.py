@@ -33,9 +33,11 @@ class CursorFrame(customtkinter.CTkFrame):
 
         self.button_left = customtkinter.CTkButton(self, text="<", height=50, width=50, command=self.left_cursor)
         self.button_left.grid(row=1, column=0, padx=20)
-
-        self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.file_array[0]), size=[100, 100])
-        self.label2 = customtkinter.CTkLabel(self, image=self.image, text="")
+        try:
+            self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.file_array[0]), size=[100, 100])
+            self.label2 = customtkinter.CTkLabel(self, image=self.image, text="")
+        except:
+            self.label2 = customtkinter.CTkLabel(self, text="")
         self.label2.grid(row=1, column=1, padx=20, sticky="nsew")
         
         self.button_right = customtkinter.CTkButton(self, text=">", height=50, width=50, command=self.right_cursor)
@@ -108,6 +110,7 @@ class CursorFrame(customtkinter.CTkFrame):
     
     def create_file_list(self, file_path):
         self.file_array = []
+        self.file_no = 0
         tmp_arr = os.path.split(file_path)
         dir_name = tmp_arr[0]
         file_name = tmp_arr[1]
@@ -156,8 +159,11 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         self.button_left = customtkinter.CTkButton(self, text="<", height=50, width=50, command=self.left_cursor)
         self.button_left.grid(row=1, column=0, padx=20)
 
-        self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.cursortrail_array[0]), size=[100, 100])
-        self.label2 = customtkinter.CTkLabel(self, image=self.image, text="")
+        try:
+            self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.cursortrail_array[0]), size=[100, 100])
+            self.label2 = customtkinter.CTkLabel(self, image=self.image, text="")
+        except:
+            self.label2 = customtkinter.CTkLabel(self, text="")
         self.label2.grid(row=1, column=1, padx=20, sticky="nsew")
         
         self.button_right = customtkinter.CTkButton(self, text=">", height=50, width=50, command=self.right_cursor)
@@ -230,6 +236,7 @@ class CursorTrailFrame(customtkinter.CTkFrame):
 
     def create_file_list(self, file_path):
         self.cursortrail_array = []
+        self.cursortrail_no = 0
         tmp_arr = os.path.split(file_path)
         dir_name = tmp_arr[0]
         file_name = tmp_arr[1]

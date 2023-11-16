@@ -14,6 +14,13 @@ conn = sqlite3.connect(dbname)
 cur = conn.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS client (path varchar NOT NULL)")
 
+if not os.path.exists("./images"):
+    try:
+        os.makedirs("./images/cursor")
+        os.makedirs("./images/cursortrail")
+    except:
+        pass
+
 
 class App(customtkinter.CTk):
 
