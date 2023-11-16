@@ -9,6 +9,7 @@ from cursor import CursorFrame, CursorTrailFrame
 FONT_TYPE = 15
 APPDIR = os.getcwd()
 
+
 class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
     def __init__(self, *args, header_name="Add cursor", **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,7 +18,6 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         self.fonts = (FONT_TYPE, 15)
         self.header_name = header_name
 
-        # フォームのセットアップをする
         self.setup_form()
 
     
@@ -38,15 +38,16 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         new_file = self.duplicate_rename(f"{APPDIR}/images/cursor/cursor.png")
         shutil.copy(self.file, new_file)
         self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drag and Drop", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=20, sticky="ew")
         self.button_apply.destroy()
         self.button_cancel.destroy()
         CursorFrame.update_file_list(self, f"{APPDIR}\\images\\cursor\\cursor (1).png")
 
+
     def cancel_cursor(self):
         self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drag and Drop", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=20, sticky="ew")
         self.button_apply.destroy()
         self.button_cancel.destroy()
@@ -57,7 +58,6 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
             name, ext = os.path.splitext(file_path)
             i = 1
             while True:
-                # 数値を3桁などにしたい場合は({:0=3})とする
                 new_name = "{} ({}){}".format(name, i, ext)
                 if not os.path.exists(new_name):
                     return new_name
@@ -67,17 +67,16 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         
 
     def setup_form(self):
-        # 行方向のマスのレイアウトを設定する。リサイズしたときに一緒に拡大したい行をweight 1に設定。
+        # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(2, weight=1)
-        # 列方向のマスのレイアウトを設定する
+        # 列方向のマスのレイアウト設定
         self.grid_columnconfigure(2, weight=1)
 
         # ラベルを表示
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
         self.label.grid(row=0, column=0, padx=20, sticky="w")
 
-
-        self.label2 = customtkinter.CTkLabel(self, text="Drag and Drop", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=20, sticky="ew")
 
         self.entryWidget = customtkinter.CTkLabel(self, text="")
@@ -94,7 +93,6 @@ class AddCursorTrailFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         self.fonts = (FONT_TYPE, 15)
         self.header_name = header_name
 
-        # フォームのセットアップをする
         self.setup_form()
 
     
@@ -115,7 +113,7 @@ class AddCursorTrailFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         new_file = self.duplicate_rename(f"{APPDIR}/images/cursortrail/cursortrail.png")
         shutil.copy(self.file, new_file)
         self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drag and Drop", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=(5, 20), sticky="ew")
         self.button_apply.destroy()
         self.button_cancel.destroy()
@@ -124,7 +122,7 @@ class AddCursorTrailFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
 
     def cancel_cursor(self):
         self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drag and Drop", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=(5, 20), sticky="ew")
         self.button_apply.destroy()
         self.button_cancel.destroy()
@@ -135,7 +133,6 @@ class AddCursorTrailFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
             name, ext = os.path.splitext(file_path)
             i = 1
             while True:
-                # 数値を3桁などにしたい場合は({:0=3})とする
                 new_name = "{} ({}){}".format(name, i, ext)
                 if not os.path.exists(new_name):
                     return new_name
@@ -145,20 +142,20 @@ class AddCursorTrailFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         
 
     def setup_form(self):
-        # 行方向のマスのレイアウトを設定する。リサイズしたときに一緒に拡大したい行をweight 1に設定。
+        # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(2, weight=1)
-        # 列方向のマスのレイアウトを設定する
+        # 列方向のマスのレイアウト設定
         self.grid_columnconfigure(2, weight=1)
 
         # ラベルを表示
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
         self.label.grid(row=0, column=0, padx=20, sticky="w")
 
-
-        self.label2 = customtkinter.CTkLabel(self, text="Drag and Drop", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=(5, 20), sticky="ew")
 
         self.entryWidget = customtkinter.CTkLabel(self, text="")
         self.entryWidget.grid(row=2, column=1, padx=20, sticky="ew")
         self.entryWidget.drop_target_register(DND_ALL)
         self.entryWidget.dnd_bind("<<Drop>>", self.get_path)
+

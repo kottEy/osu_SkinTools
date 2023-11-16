@@ -42,12 +42,12 @@ class Osu():
         dbname = 'osu_dir.db'
         conn = sqlite3.connect(dbname)
         cur = conn.cursor()
-        # osuフォルダのディレクトリを取得する
+        # osuフォルダのディレクトリを取得
         try:
             file_path = Osu.get_osudir(self)
             file_path = str(file_path).replace('osu!.exe', '')
             dir = os.getcwd()
-            # 現在のスキンを取得する
+            # 現在のスキンを取得
             os.chdir(file_path)
             for file in glob.glob(f"{file_path}osu!.*.cfg"):
                 cfg_file = file
@@ -57,7 +57,6 @@ class Osu():
                         curr_skin = line.replace('Skin = ', '')
                         curr_skin = curr_skin.replace('\n', '')
                         break
-            
             os.chdir(dir)
             return curr_skin
         except:
@@ -67,9 +66,8 @@ class Osu():
             sys.exit()
 
     
-
     def file_read(self):
-        # ファイル選択ダイアログを表示する
+        # ファイル選択ダイアログを表示
         current_dir = os.path.abspath(os.path.dirname(__file__))
         tk.messagebox.showinfo(title="Skin Tools", message="Please select osu!.exe")
         file_path = tk.filedialog.askopenfilename(filetypes=[("exeファイル","*.exe")],initialdir=current_dir)

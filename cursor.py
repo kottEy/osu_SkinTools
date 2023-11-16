@@ -4,8 +4,10 @@ import customtkinter
 from PIL import Image
 from osu import Osu
 
+
 FONT_TYPE = 15
 APPDIR = os.getcwd()
+
 
 class CursorFrame(customtkinter.CTkFrame):
     def __init__(self, *args, header_name="Cursor", **kwargs):
@@ -14,14 +16,13 @@ class CursorFrame(customtkinter.CTkFrame):
         self.fonts = (FONT_TYPE, 15)
         self.header_name = header_name
 
-        # フォームのセットアップをする
         self.setup_form()
 
 
     def setup_form(self):
-        # 行方向のマスのレイアウトを設定する。リサイズしたときに一緒に拡大したい行をweight 1に設定。
+        # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(1, weight=1)
-        # 列方向のマスのレイアウトを設定する
+        # 列方向のマスのレイアウト設定
         self.grid_columnconfigure(3, weight=1)
 
         # ラベルを表示
@@ -80,6 +81,7 @@ class CursorFrame(customtkinter.CTkFrame):
     def left_cursor(self):
         self.change_cursor("Left")
     
+
     def right_cursor(self):
         self.change_cursor("Right")
 
@@ -136,14 +138,13 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         self.fonts = (FONT_TYPE, 15)
         self.header_name = header_name
 
-        # フォームのセットアップをする
         self.setup_form()
 
 
     def setup_form(self):
-        # 行方向のマスのレイアウトを設定する。リサイズしたときに一緒に拡大したい行をweight 1に設定。
+        # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(1, weight=1)
-        # 列方向のマスのレイアウトを設定する
+        # 列方向のマスのレイアウト設定
         self.grid_columnconfigure(3, weight=1)
 
         # ラベルを表示
@@ -202,6 +203,7 @@ class CursorTrailFrame(customtkinter.CTkFrame):
     def left_cursor(self):
         self.change_cursor("Left")
     
+
     def right_cursor(self):
         self.change_cursor("Right")
 
@@ -249,3 +251,4 @@ class CursorTrailFrame(customtkinter.CTkFrame):
             file_ext = os.path.splitext(fname)[1].lower()
             if file_ext == ".jpg" or file_ext == ".png" or file_ext == ".tif" or file_ext == ".jpeg" :
                 self.cursortrail_array.append(os.path.join(dir_name ,fname))
+
