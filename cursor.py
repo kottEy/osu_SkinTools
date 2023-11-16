@@ -89,7 +89,7 @@ class CursorFrame(customtkinter.CTkFrame):
 
 
     def change_cursor(self, flag):
-        self.update_file_list(self.file_array[self.file_no])
+        self.update_file_list(f'{APPDIR}\\images\\cursor\\')
         cnt = len(self.file_array)
         if cnt == 0:                                # 画像ファイル配列が空の時何もしない
             return
@@ -215,7 +215,7 @@ class CursorTrailFrame(customtkinter.CTkFrame):
 
 
     def change_cursor(self, flag):
-        self.update_file_list(self.cursortrail_array[self.cursortrail_no])
+        self.update_file_list(f'{APPDIR}\\images\\cursortrail\\')
         cnt = len(self.cursortrail_array)
         if cnt == 0:                                # 画像ファイル配列が空の時何もしない
             return
