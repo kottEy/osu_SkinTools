@@ -59,5 +59,8 @@ class App(customtkinter.CTk):
 if __name__ == "__main__":
     # アプリケーション実行
     app = App()
-    app.iconbitmap('./osu_SkinTools_logo.ico')
+    try:
+        app.iconbitmap('./osu_SkinTools_logo.ico')
+    except:
+        pass
     app.mainloop()
