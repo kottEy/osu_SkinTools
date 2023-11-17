@@ -36,12 +36,20 @@ class Osu():
             conn.commit()
 
         return file_path
-    
+
 
     def get_currskin(self):
         dbname = 'osu_dir.db'
         conn = sqlite3.connect(dbname)
         cur = conn.cursor()
+        cur.execute("SELECT path FROM osu_currskin")
+        for r in cur:
+            pass
+        try:
+            skin_dir = r[0]
+            return os.path.basename(os.path.dirname(f"{skin_dir}/skin.ini"))
+        except:
+            pass
         # osuフォルダのディレクトリを取得
         try:
             file_path = Osu.get_osudir(self)

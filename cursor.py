@@ -29,28 +29,54 @@ class CursorFrame(customtkinter.CTkFrame):
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
         self.label.grid(row=0, column=0, padx=20, sticky="w")
 
-        self.create_file_list(f"{APPDIR}\\images\\cursor\\cursor (1).png")
+        self.create_file_list(f"{APPDIR}\\images\\cursor\\cursor.png")
 
-        self.button_left = customtkinter.CTkButton(self, text="<", height=50, width=50, command=self.left_cursor)
-        self.button_left.grid(row=1, column=0, padx=20)
         try:
             self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.file_array[0]), size=[100, 100])
             self.label2 = customtkinter.CTkLabel(self, image=self.image, text="")
         except:
             self.label2 = customtkinter.CTkLabel(self, text="")
         self.label2.grid(row=1, column=1, padx=20, sticky="nsew")
-        
-        self.button_right = customtkinter.CTkButton(self, text=">", height=50, width=50, command=self.right_cursor)
+
+        self.button_left = customtkinter.CTkButton(self, text="<", fg_color="#444", hover_color="#333", height=50, width=50, command=self.left_cursor)
+        self.button_left.grid(row=1, column=0, padx=20)
+
+        self.button_right = customtkinter.CTkButton(self, text=">", fg_color="#444", hover_color="#333", height=50, width=50, command=self.right_cursor)
         self.button_right.grid(row=1, column=2, padx=20)
 
-        self.button_apply = customtkinter.CTkButton(self, text="Apply", command=self.apply)
-        self.button_apply.grid(row=2, column=1, pady=(30, 10))
+        self.button_apply = customtkinter.CTkButton(self, text="Default", width=50, height=28, command=self.apply_default)
+        self.button_apply.grid(row=3, column=0, pady=(0, 10))
 
-        self.button_apply = customtkinter.CTkButton(self, text="@2x", command=self.apply2x)
+        self.button_apply = customtkinter.CTkButton(self, text="Apply", command=self.apply)
         self.button_apply.grid(row=3, column=1, pady=(0, 10))
 
-        self.button_delete2x = customtkinter.CTkButton(self, text="🗑", command=self.delete2x, width=50, height=28)
+        self.button_apply = customtkinter.CTkButton(self, text="@2x", fg_color="#444", hover_color="#333", command=self.apply2x)
+        self.button_apply.grid(row=2, column=1, pady=(30, 10))
+
+        self.button_delete2x = customtkinter.CTkButton(self, text="🗑", fg_color="#700", hover_color="#400", width=50, height=28, command=self.delete2x)
         self.button_delete2x.grid(row=3, column=2, pady=(0, 10))
+
+
+    def apply_default(self):
+        curr_skin = Osu.get_currskin(self)
+        osu_dir = Osu.get_osudir(self)
+        osu_dir = str(osu_dir).replace('osu!.exe', '')
+        os.chdir(osu_dir)
+        os.chdir(APPDIR)
+        file_name = {'cursor.png',
+                     'cursor@2x.png',
+                     'cursortrail.png',
+                     'cursortrail@2x.png',
+                     } 
+        for f in file_name:
+            try:
+                os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')
+            except:
+                pass
+            try:
+                shutil.copy(f'./images/{curr_skin}/{f}', f'{osu_dir}Skins\\{curr_skin}\\{f}')
+            except:
+                pass
 
 
     def apply(self):
@@ -59,6 +85,13 @@ class CursorFrame(customtkinter.CTkFrame):
         os.chdir(osu_dir)
         os.chdir(APPDIR)
         curr_skin = Osu.get_currskin(self)
+        file_name = {'cursor.png'
+                    }
+        for f in file_name:
+            try:
+                os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')
+            except:
+                pass
         shutil.copy(f'{self.file_array[self.file_no]}', f'{osu_dir}Skins\\{curr_skin}\\cursor.png')
     
 
@@ -77,7 +110,14 @@ class CursorFrame(customtkinter.CTkFrame):
         os.chdir(osu_dir)
         os.chdir(APPDIR)
         curr_skin = Osu.get_currskin(self)
-        os.remove(f'{osu_dir}Skins\\{curr_skin}\\cursor@2x.png')
+        file_name = {'cursor.png',
+                     'cursor@2x.png',
+                    }
+        for f in file_name:
+            try:
+                os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')
+            except:
+                pass
 
 
     def left_cursor(self):
@@ -134,6 +174,28 @@ class CursorFrame(customtkinter.CTkFrame):
                 self.file_array.append(os.path.join(dir_name ,fname))
 
 
+    def save_skincursor(self):
+        curr_skin = Osu.get_currskin(self)
+        try:
+            os.makedirs(f"./images/{curr_skin}")
+        except:
+            return
+        osu_dir = Osu.get_osudir(self)
+        osu_dir = str(osu_dir).replace('osu!.exe', '')
+        os.chdir(osu_dir)
+        os.chdir(APPDIR)
+        file_name = {f'{osu_dir}Skins\\{curr_skin}\\cursor.png',
+                        f'{osu_dir}Skins\\{curr_skin}\\cursor@2x.png',
+                        f'{osu_dir}Skins\\{curr_skin}\\cursortrail.png', 
+                        f'{osu_dir}Skins\\{curr_skin}\\cursortrail@2x.png'} 
+        for f in file_name:
+            try:
+                shutil.copy(f, f'./images/{curr_skin}/')
+            except:
+                pass
+        
+
+
 class CursorTrailFrame(customtkinter.CTkFrame):
     def __init__(self, *args, header_name="Cursor Trail", **kwargs):
         super().__init__(*args, **kwargs)
@@ -154,10 +216,7 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
         self.label.grid(row=0, column=0, padx=20, sticky="w")
 
-        self.create_file_list(f"{APPDIR}\\images\\cursortrail\\cursortrail (1).png")
-
-        self.button_left = customtkinter.CTkButton(self, text="<", height=50, width=50, command=self.left_cursor)
-        self.button_left.grid(row=1, column=0, padx=20)
+        self.create_file_list(f"{APPDIR}\\images\\cursortrail\\cursortrail.png")
 
         try:
             self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.cursortrail_array[0]), size=[100, 100])
@@ -165,17 +224,20 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         except:
             self.label2 = customtkinter.CTkLabel(self, text="")
         self.label2.grid(row=1, column=1, padx=20, sticky="nsew")
+
+        self.button_left = customtkinter.CTkButton(self, text="<", fg_color="#444", hover_color="#333", height=50, width=50, command=self.left_cursor)
+        self.button_left.grid(row=1, column=0, padx=20)
         
-        self.button_right = customtkinter.CTkButton(self, text=">", height=50, width=50, command=self.right_cursor)
+        self.button_right = customtkinter.CTkButton(self, text=">", fg_color="#444", hover_color="#333", height=50, width=50, command=self.right_cursor)
         self.button_right.grid(row=1, column=2, padx=20)
 
         self.button_apply = customtkinter.CTkButton(self, text="Apply", command=self.apply)
-        self.button_apply.grid(row=2, column=1, pady=(30, 10))
-
-        self.button_apply = customtkinter.CTkButton(self, text="@2x", command=self.apply2x)
         self.button_apply.grid(row=3, column=1, pady=(0, 10))
 
-        self.button_delete2x = customtkinter.CTkButton(self, text="🗑", command=self.delete2x, width=50, height=28)
+        self.button_apply = customtkinter.CTkButton(self, text="@2x", fg_color="#444", hover_color="#333", command=self.apply2x)
+        self.button_apply.grid(row=2, column=1, pady=(30, 10))
+
+        self.button_delete2x = customtkinter.CTkButton(self, text="🗑", fg_color="#700", hover_color="#400", width=50, height=28, command=self.delete2x)
         self.button_delete2x.grid(row=3, column=2, pady=(0, 10))
 
 
@@ -185,6 +247,13 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         os.chdir(osu_dir)
         os.chdir(APPDIR)
         curr_skin = Osu.get_currskin(self)
+        file_name = {'cursortrail.png'
+                    }
+        for f in file_name:
+            try:
+                os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')
+            except:
+                pass
         shutil.copy(f'{self.cursortrail_array[self.cursortrail_no]}', f'{osu_dir}Skins\\{curr_skin}\\cursortrail.png')
 
     
@@ -203,7 +272,14 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         os.chdir(osu_dir)
         os.chdir(APPDIR)
         curr_skin = Osu.get_currskin(self)
-        os.remove(f'{osu_dir}Skins\\{curr_skin}\\cursortrail@2x.png')
+        file_name = {'cursortrail.png',
+                     'cursortrail@2x.png',
+                    }
+        for f in file_name:
+            try:
+                os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')
+            except:
+                pass
     
 
     def left_cursor(self):

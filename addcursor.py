@@ -113,7 +113,7 @@ class AddCursorTrailFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         new_file = self.duplicate_rename(f"{APPDIR}/images/cursortrail/cursortrail.png")
         shutil.copy(self.file, new_file)
         self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop file here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=(5, 20), sticky="ew")
         self.button_apply.destroy()
         self.button_cancel.destroy()
@@ -122,7 +122,7 @@ class AddCursorTrailFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
 
     def cancel_cursor(self):
         self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
+        self.label2 = customtkinter.CTkLabel(self, text="Drop file here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=(5, 20), sticky="ew")
         self.button_apply.destroy()
         self.button_cancel.destroy()
