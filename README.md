@@ -5,6 +5,7 @@ osu!のSkinをGUIでいじれるツールです。
 ## 機能
 - Cursor、Cursortrailの変更、適用
 - Drag & DropでCursor、CursorTrailの追加
+- コレクション機能（使用中のCursor、CursorTrailをコレクションに追加）
   
 ## 注意
 - 実行ファイル（osu!SkinTools.exe）をフォルダ外に移動しないでください。正常に動作しなくなる可能性があります。
@@ -12,4 +13,4 @@ osu!のSkinをGUIでいじれるツールです。
     
 ## Download
 osu_SkinTools.zipをダウンロードして、解凍してください  
-[v1.1] https://github.com/kottEy/osu_SkinTools/releases/tag/v1.1
+[v1.2] https://github.com/kottEy/osu_SkinTools/releases/tag/v1.2
