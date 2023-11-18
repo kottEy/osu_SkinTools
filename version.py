@@ -1,5 +1,5 @@
 import json
-with open('./version/version.json') as f:
+with open('./version.json') as f:
     j = json.load(f)
 
 VERSION = j['version']
