@@ -1,1 +1,5 @@
-VERSION = "v1.0"
+import json
+with open('./version/version.json') as f:
+    j = json.load(f)
+
+VERSION = j['version']
