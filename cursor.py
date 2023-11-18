@@ -29,7 +29,7 @@ class CursorFrame(customtkinter.CTkFrame):
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
         self.label.grid(row=0, column=0, padx=20, sticky="w")
 
-        self.create_file_list(f"{APPDIR}\\images\\cursor\\cursor.png")
+        self.create_file_list(f"{APPDIR}\\images\\cursor\\cursor (1).png")
 
         try:
             self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.file_array[0]), size=[100, 100])
@@ -44,7 +44,7 @@ class CursorFrame(customtkinter.CTkFrame):
         self.button_right = customtkinter.CTkButton(self, text=">", fg_color="#444", hover_color="#333", height=50, width=50, command=self.right_cursor)
         self.button_right.grid(row=1, column=2, padx=20)
 
-        self.button_apply = customtkinter.CTkButton(self, text="Default", width=50, height=28, command=self.apply_default)
+        self.button_apply = customtkinter.CTkButton(self, text="⟲", width=50, height=28, command=self.apply_default)
         self.button_apply.grid(row=3, column=0, pady=(0, 10))
 
         self.button_apply = customtkinter.CTkButton(self, text="Apply", command=self.apply)
@@ -85,25 +85,31 @@ class CursorFrame(customtkinter.CTkFrame):
         os.chdir(osu_dir)
         os.chdir(APPDIR)
         curr_skin = Osu.get_currskin(self)
-        file_name = {'cursor.png'
-                    }
+        file_name = ['cursor.png'
+                    ]
+        try:
+            temp = self.cursor2x
+            if temp == True:
+                file_name.append('cursor@2x.png')
+                self.cursor2x = False
+        except:
+            pass
+        try:
+            os.remove(f'{osu_dir}Skins\\{curr_skin}\\cursor@2x.png')
+        except:
+            pass
         for f in file_name:
             try:
                 os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')
             except:
                 pass
-        shutil.copy(f'{self.file_array[self.file_no]}', f'{osu_dir}Skins\\{curr_skin}\\cursor.png')
+            shutil.copy(f'{self.file_array[self.file_no]}', f'{osu_dir}Skins\\{curr_skin}\\{f}')
     
 
     def apply2x(self):
-        osu_dir = Osu.get_osudir(self)
-        osu_dir = str(osu_dir).replace('osu!.exe', '')
-        os.chdir(osu_dir)
-        os.chdir(APPDIR)
-        curr_skin = Osu.get_currskin(self)
-        shutil.copy(f'{self.file_array[self.file_no]}', f'{osu_dir}Skins\\{curr_skin}\\cursor@2x.png')
-
+        self.cursor2x = True
     
+
     def delete2x(self):
         osu_dir = Osu.get_osudir(self)
         osu_dir = str(osu_dir).replace('osu!.exe', '')
@@ -216,7 +222,7 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
         self.label.grid(row=0, column=0, padx=20, sticky="w")
 
-        self.create_file_list(f"{APPDIR}\\images\\cursortrail\\cursortrail.png")
+        self.create_file_list(f"{APPDIR}\\images\\cursortrail\\cursortrail (1).png")
 
         try:
             self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.cursortrail_array[0]), size=[100, 100])
@@ -247,23 +253,33 @@ class CursorTrailFrame(customtkinter.CTkFrame):
         os.chdir(osu_dir)
         os.chdir(APPDIR)
         curr_skin = Osu.get_currskin(self)
-        file_name = {'cursortrail.png'
-                    }
+        file_name = ['cursortrail.png'
+                    ]
+        try:
+            temp = self.cursortrail2x
+            if temp == True:
+                file_name.append('cursortrail@2x.png')
+                self.cursortrail2x = False
+        except:
+            pass
+        try:
+            os.remove(f'{osu_dir}Skins\\{curr_skin}\\cursortrail@2x.png')
+        except:
+            pass
         for f in file_name:
             try:
                 os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')
             except:
                 pass
-        shutil.copy(f'{self.cursortrail_array[self.cursortrail_no]}', f'{osu_dir}Skins\\{curr_skin}\\cursortrail.png')
+            try:
+                shutil.copy(f'{self.cursortrail_array[self.cursortrail_no]}', f'{osu_dir}Skins\\{curr_skin}\\{f}')
+            except:
+                pass
+
 
     
     def apply2x(self):
-        osu_dir = Osu.get_osudir(self)
-        osu_dir = str(osu_dir).replace('osu!.exe', '')
-        os.chdir(osu_dir)
-        os.chdir(APPDIR)
-        curr_skin = Osu.get_currskin(self)
-        shutil.copy(f'{self.cursortrail_array[self.cursortrail_no]}', f'{osu_dir}Skins\\{curr_skin}\\cursortrail@2x.png')
+        self.cursortrail2x = True
 
 
     def delete2x(self):
