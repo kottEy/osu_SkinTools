@@ -59,6 +59,8 @@ class Updater(object):
         for update_file in update_files:
             if os.path.basename(update_file) == 'images':
                 pass
+            elif os.path.basename(update_file) == 'updater.exe':
+                pass
             else:
                 shutil.move(update_file, os.path.join(self.current_dir, os.path.basename(update_file)))
                 print(f"[INFO] Moved {update_file}")
