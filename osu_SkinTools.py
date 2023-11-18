@@ -1,10 +1,14 @@
 import os
 import sqlite3
+import subprocess
+import sys
+import tkinter.messagebox
 import customtkinter
 from cursor import CursorFrame, CursorTrailFrame
 from collection import CollectionFrame
 from currentskin import CurrentSkinFrame
 from addcursor import AddCursorFrame, AddCursorTrailFrame
+from updater import Updater
 
 
 FONT_TYPE = "meiryo"
@@ -73,6 +77,13 @@ class App(customtkinter.CTk):
 
 
 if __name__ == "__main__":
+    # アプリの更新検知
+    ud = Updater()
+    if ud.check_update():
+        is_update = tkinter.messagebox.askquestion("更新しますか?", f"{ud.latest_version}の更新プログラムが見つかりました。\nアップデートしますか?")
+        if is_update == "yes":
+            subprocess.Popen("updater.exe", close_fds=True)
+            sys.exit()
     # アプリケーション実行
     app = App()
     try:
