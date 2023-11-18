@@ -25,7 +25,7 @@ class Updater(object):
         if self.latest_version == self.now_version:
             return False
         return True
-    
+
     # github rest apiをたたいてlatest releaseを取得
     def _get_latest_release(self):
         req: object = urllib.request.Request(self.latest_release_url)
@@ -57,8 +57,11 @@ class Updater(object):
         print("[INFO] 更新プログラムの適用を開始します。")
         update_files = glob.glob(os.path.join(self.update_dir, "*"))
         for update_file in update_files:
-            shutil.move(update_file, os.path.join(self.current_dir, os.path.basename(update_file)))
-            print(f"[INFO] Moved {update_file}")
+            if os.path.basename(update_file) == 'images':
+                pass
+            else:
+                shutil.move(update_file, os.path.join(self.current_dir, os.path.basename(update_file)))
+                print(f"[INFO] Moved {update_file}")
         shutil.rmtree(self.update_dir)
         os.remove(self.zip_name)
         print(f"[INFO] Removed {self.zip_name}")
@@ -76,4 +79,3 @@ if __name__ == "__main__":
     ud.update_application()
     print("[INFO] アップデートが終了しました。")
     tkinter.messagebox.showinfo("更新終了", "更新が終了しました。")
-
