@@ -52,6 +52,7 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
         cur.execute("DELETE FROM osu_currskin")
         conn.commit()
         self.currentskin = Osu.get_currskin(self)
+        CursorFrame.save_skincursor(self)
         if len(self.currentskin) >= 10:
             self.currentskin = self.currentskin[:10]
             self.currentskin += ' ...'
