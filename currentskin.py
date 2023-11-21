@@ -6,7 +6,6 @@ import shutil
 import customtkinter
 import tkinter as tk
 import sqlite3
-from cursor import CursorFrame
 
 
 dbname = 'osu_dir.db'
