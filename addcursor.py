@@ -35,14 +35,14 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
 
 
     def add_cursor(self):
-        new_file = self.duplicate_rename(f"{APPDIR}/images/cursor/{self.type}.png")
+        new_file = self.duplicate_rename(f"{APPDIR}/images/{self.type}/{self.type}.png")
         shutil.copy(self.file, new_file)
         self.label2.destroy()
         self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
         self.label2.grid(row=1, column=1, padx=20, sticky="ew")
         self.button_apply.destroy()
         self.button_cancel.destroy()
-        CursorFrame.update_file_list(self, f"{APPDIR}\\images\\cursor\\")
+        CursorFrame.update_file_list(self, f"{APPDIR}\\images\\{self.type}\\")
 
 
     def cancel_cursor(self):
