@@ -19,8 +19,8 @@ dbname = 'osu_dir.db'
 conn = sqlite3.connect(dbname)
 cur = conn.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS client (path varchar NOT NULL)")
-cur.execute("CREATE TABLE IF NOT EXISTS osu_currskin (path varchar)")
-cur.execute("DELETE FROM osu_currskin")
+cur.execute("CREATE TABLE IF NOT EXISTS currskin (name varchar)")
+cur.execute("DELETE FROM currskin")
 conn.commit()
 
 mkdir = {"./images/cursor",

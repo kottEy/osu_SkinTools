@@ -74,7 +74,7 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
                         curr_skin = curr_skin.replace('\n', '')
                         break
             os.chdir(dir)
-            cur.execute("INSERT INTO currskin values(?)", (curr_skin, ))
+            cur.execute("INSERT INTO currskin VALUES(?)", (curr_skin, ))
             conn.commit()
             return curr_skin
         except:
@@ -123,7 +123,7 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
 
 
     def btn_select_callback(self):
-            cur.execute("DELETE FROM osu_currskin")
+            cur.execute("DELETE FROM currskin")
             conn.commit()
             skin_path = self.select_skin()
             if skin_path != None:

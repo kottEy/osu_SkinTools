@@ -91,7 +91,7 @@ class CollectionFrame(customtkinter.CTkFrame):
         for r in cur:
             curr_skin = r[0]
         try:
-            temp = self.choice
+            self.choice
         except:
             return
         osu_dir = str(self.osu_dir).replace('osu!.exe', '')

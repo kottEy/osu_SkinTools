@@ -20,10 +20,9 @@ class Osu():
         cur.execute("SELECT path FROM client")
 
         for r in cur:
-            pass
-        try:
             file_path = r[0]
-
+        try:
+            file_path
         except:
             file_path = Osu.file_read(self)
             if file_path != None:
