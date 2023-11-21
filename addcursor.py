@@ -25,6 +25,7 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         self.file = str(event.data).replace('{', '')
         self.file = str(self.file).replace('}', '')
         image = customtkinter.CTkImage(light_image=Image.open(fp=self.file), size=[25, 25])
+        
         self.label2.grid(row=1, column=1, padx=(55, 0))
         self.label2.configure(text="", image=image)
 

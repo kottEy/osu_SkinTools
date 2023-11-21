@@ -92,8 +92,8 @@ class CursorFrame(customtkinter.CTkFrame):
         file_name = [f'{self.type}.png'
                     ]
         try:
-            temp = self.cursor2x
-            if temp == True:
+            self.cursor2x
+            if self.cursor2x == True:
                 file_name.append(f'{self.type}@2x.png')
                 self.cursor2x = False
         except:
