@@ -1,13 +1,14 @@
 import os
 import sys
-import re
-import glob
 import sqlite3
 import tkinter as tk
 import os
 
 
 class Osu():
+    def __init__(self) -> None:
+        pass
+
     def get_osudir(self):
 
         dbname = 'osu_dir.db'
@@ -36,44 +37,8 @@ class Osu():
             conn.commit()
 
         return file_path
-
-
-    def get_currskin(self):
-        dbname = 'osu_dir.db'
-        conn = sqlite3.connect(dbname)
-        cur = conn.cursor()
-        cur.execute("SELECT path FROM osu_currskin")
-        for r in cur:
-            pass
-        try:
-            skin_dir = r[0]
-            return os.path.basename(os.path.dirname(f"{skin_dir}/skin.ini"))
-        except:
-            pass
-        # osuフォルダのディレクトリを取得
-        try:
-            file_path = Osu.get_osudir(self)
-            file_path = str(file_path).replace('osu!.exe', '')
-            dir = os.getcwd()
-            # 現在のスキンを取得
-            os.chdir(file_path)
-            for file in glob.glob(f"{file_path}osu!.*.cfg"):
-                cfg_file = file
-            with open(cfg_file, encoding="utf-8") as f:
-                for line in f:
-                    if re.search(r'^Skin = *', line):
-                        curr_skin = line.replace('Skin = ', '')
-                        curr_skin = curr_skin.replace('\n', '')
-                        break
-            os.chdir(dir)
-            return curr_skin
-        except:
-            cur.execute("DELETE FROM client")
-            conn.commit()
-            tk.messagebox.showerror(title="Skin Tools", message="osu!.[user].cfgが見つかりませんでした。")
-            sys.exit()
-
     
+
     def file_read(self):
         # ファイル選択ダイアログを表示
         current_dir = os.path.abspath(os.path.dirname(__file__))

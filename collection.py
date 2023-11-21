@@ -1,11 +1,13 @@
 import os
+import sqlite3
 import shutil
 import customtkinter
 import tkinter as tk
-from PIL import Image
-from osu import Osu
 
 
+dbname = 'osu_dir.db'
+conn = sqlite3.connect(dbname)
+cur = conn.cursor()
 FONT_TYPE = 15
 APPDIR = os.getcwd()
 
@@ -16,9 +18,10 @@ class CollectionFrame(customtkinter.CTkFrame):
 
         self.fonts = (FONT_TYPE, 15)
         self.header_name = header_name
-
+        cur.execute('SELECT path FROM client')
+        for r in cur:
+            self.osu_dir = r[0]
         self.setup_form()
-
     def setup_form(self):
         # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(1, weight=1)
@@ -58,16 +61,17 @@ class CollectionFrame(customtkinter.CTkFrame):
 
 
     def add_collection(self):
+        cur.execute('SELECT name FROM currskin')
+        for r in cur:
+            curr_skin = r[0]
         name = self.entry_add.get()
         try:
             os.makedirs(f"./images/collections/{name}")
         except:
             tk.messagebox.showerror(title="Skin Tools", message="Failed to create folder.")
-        osu_dir = Osu.get_osudir(self)
-        osu_dir = str(osu_dir).replace('osu!.exe', '')
+        osu_dir = str(self.osu_dir).replace('osu!.exe', '')
         os.chdir(osu_dir)
         os.chdir(APPDIR)
-        curr_skin = Osu.get_currskin(self)
         file_name = {'cursor.png',
                      'cursor@2x.png',
                      'cursortrail.png',
@@ -83,15 +87,14 @@ class CollectionFrame(customtkinter.CTkFrame):
         
 
     def apply_collection(self):
+        cur.execute('SELECT name FROM currskin')
+        for r in cur:
+            curr_skin = r[0]
         try:
             temp = self.choice
         except:
             return
-        osu_dir = Osu.get_osudir(self)
-        osu_dir = str(osu_dir).replace('osu!.exe', '')
-        os.chdir(osu_dir)
-        os.chdir(APPDIR)
-        curr_skin = Osu.get_currskin(self)
+        osu_dir = str(self.osu_dir).replace('osu!.exe', '')
         file_name = {'cursor.png',
                      'cursor@2x.png',
                      'cursortrail.png',
