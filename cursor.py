@@ -81,6 +81,8 @@ class CursorFrame(customtkinter.CTkFrame):
                      'cursor@2x.png',
                      'cursortrail.png',
                      'cursortrail@2x.png',
+                     'cursormiddle.png',
+                     'cursormiddle@2x.png'
                      } 
         for f in file_name:
             try:

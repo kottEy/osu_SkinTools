@@ -141,7 +141,7 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
                     self.currentskin = os.path.basename(os.path.dirname(f"{skin_path}/skin.ini"))
                     self.save_skincursor()
                     if len(self.currentskin) >= 10:
-                        currentskin = f'{self.currentskin[:10]}...'
+                        currentskin = f'{self.currentskin[:10]} ...'
                     else:
                         currentskin = self.currentskin
                     self.label2.configure(text=currentskin)
