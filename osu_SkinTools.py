@@ -57,7 +57,7 @@ class App(customtkinter.CTk):
 
         Osu.get_osudir(self)
 
-        self.read_current_skin_frame = CurrentSkinFrame(master=self, header_name="Current Skin")
+        self.read_current_skin_frame = CurrentSkinFrame(master=self, header_name="Current skin")
         self.read_current_skin_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
         self.read_collection = CollectionFrame(master=self, header_name="Collection")
@@ -66,13 +66,13 @@ class App(customtkinter.CTk):
         self.read_cursor_frame = CursorFrame(master=self, header_name="Cursor", type="cursor")
         self.read_cursor_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         
-        self.read_cursortrail_frame = CursorFrame(master=self, header_name="Cursor Trail", type="cursortrail")
+        self.read_cursortrail_frame = CursorFrame(master=self, header_name="Cursortrail", type="cursortrail")
         self.read_cursortrail_frame.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
 
-        self.read_addcursor_frame = AddCursorFrame(master=self, header_name="Add Cursor", type="cursor")
+        self.read_addcursor_frame = AddCursorFrame(master=self, header_name="Add cursor", type="cursor")
         self.read_addcursor_frame.grid(row=2, column=0, padx=20, pady=20, sticky="ew")
 
-        self.read_addcursortrail_frame = AddCursorFrame(master=self, header_name="Add Cursor Trail", type="cursortrail")
+        self.read_addcursortrail_frame = AddCursorFrame(master=self, header_name="Add cursortrail", type="cursortrail")
         self.read_addcursortrail_frame.grid(row=2, column=1, padx=20, pady=20, sticky="ew")
 
 

@@ -1,6 +1,8 @@
 import os
 import shutil
 import sqlite3
+import numpy
+import tkinter as tk
 import customtkinter
 from PIL import Image
 
@@ -28,7 +30,7 @@ class CursorFrame(customtkinter.CTkFrame):
         # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(1, weight=1)
         # 列方向のマスのレイアウト設定
-        self.grid_columnconfigure(3, weight=1)
+        self.grid_columnconfigure(4, weight=1)
 
         # ラベルを表示
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
@@ -51,16 +53,20 @@ class CursorFrame(customtkinter.CTkFrame):
 
         if self.type == 'cursor':
             self.button_apply = customtkinter.CTkButton(self, text="⟲", width=50, height=28, command=self.apply_default)
-            self.button_apply.grid(row=3, column=0, pady=(0, 10))
+            self.button_apply.grid(row=4, column=0, pady=(0, 10))
+
+        if self.type == 'cursortrail':
+            self.checkbox_cursormiddle = customtkinter.CTkCheckBox(self, text="enable cursormiddle", font=(FONT_TYPE, 11), checkbox_width=15, checkbox_height=15, height=14, variable=tk.BooleanVar(self, False), onvalue=True, offvalue=False)
+            self.checkbox_cursormiddle.grid(row=2, column=1, pady=(20, 0))
 
         self.button_apply = customtkinter.CTkButton(self, text="Apply", command=self.apply)
-        self.button_apply.grid(row=3, column=1, pady=(0, 10))
+        self.button_apply.grid(row=4, column=1, pady=(0, 10))
 
         self.button_apply = customtkinter.CTkButton(self, text="@2x", fg_color="#444", hover_color="#333", command=self.apply2x)
-        self.button_apply.grid(row=2, column=1, pady=(30, 10))
+        self.button_apply.grid(row=3, column=1, pady=(10, 10))
 
         self.button_delete2x = customtkinter.CTkButton(self, text="🗑", fg_color="#700", hover_color="#400", width=50, height=28, command=self.delete2x)
-        self.button_delete2x.grid(row=3, column=2, pady=(0, 10))
+        self.button_delete2x.grid(row=4, column=2, pady=(0, 10))
 
 
     def apply_default(self):
@@ -91,6 +97,9 @@ class CursorFrame(customtkinter.CTkFrame):
         osu_dir = str(self.osu_dir).replace('osu!.exe', '')
         file_name = [f'{self.type}.png'
                     ]
+        cursor_middle = ['cursormiddle.png',
+                         'cursormiddle@2x.png'
+                         ]
         try:
             self.cursor2x
             if self.cursor2x == True:
@@ -102,6 +111,18 @@ class CursorFrame(customtkinter.CTkFrame):
             os.remove(f'{osu_dir}Skins\\{curr_skin}\\{self.type}@2x.png')
         except:
             pass
+        if self.type == "cursortrail":
+            for cm in cursor_middle:
+                try:
+                    os.remove(f'{osu_dir}Skins\\{curr_skin}\\{cm}')
+                except:
+                    pass
+            flag = self.checkbox_cursormiddle.get()
+            if flag == True:
+                depth = 4
+                newImArray = numpy.zeros((1, 1, depth), dtype='uint8')
+                newIm = Image.fromarray(newImArray)
+                newIm.save(f'{osu_dir}Skins\\{curr_skin}\\{cursor_middle[0]}')
         for f in file_name:
             try:
                 os.remove(f'{osu_dir}Skins\\{curr_skin}\\{f}')

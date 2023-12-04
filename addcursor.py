@@ -38,20 +38,26 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
     def add_cursor(self):
         new_file = self.duplicate_rename(f"{APPDIR}/images/{self.type}/{self.type}.png")
         shutil.copy(self.file, new_file)
-        self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
-        self.label2.grid(row=1, column=1, padx=20, sticky="ew")
+        self.change_label()
         self.button_apply.destroy()
         self.button_cancel.destroy()
         CursorFrame.update_file_list(self, f"{APPDIR}\\images\\{self.type}\\")
 
 
     def cancel_cursor(self):
-        self.label2.destroy()
-        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
-        self.label2.grid(row=1, column=1, padx=20, sticky="ew")
+        self.change_label()
         self.button_apply.destroy()
         self.button_cancel.destroy()
+
+    
+    def change_label(self):
+        self.label2.destroy()
+        self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
+        if self.type == "cursor":
+            self.label2.grid(row=1, column=1, padx=20, sticky="ew")
+        else:
+            self.label2.grid(row=1, column=1, padx=(5, 20), sticky="ew")
+        
 
 
     def duplicate_rename(self, file_path):
@@ -78,8 +84,10 @@ class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
         self.label.grid(row=0, column=0, padx=20, sticky="w")
 
         self.label2 = customtkinter.CTkLabel(self, text="Drop files here.", font=self.fonts)
-        self.label2.grid(row=1, column=1, padx=20, sticky="ew")
-
+        if self.type == "cursor":
+            self.label2.grid(row=1, column=1, padx=20, sticky="ew")
+        else:
+            self.label2.grid(row=1, column=1, padx=(5, 20), sticky="ew")
         self.entryWidget = customtkinter.CTkLabel(self, text="")
         self.entryWidget.grid(row=2, column=1, padx=20, sticky="ew")
         self.entryWidget.drop_target_register(DND_ALL)

@@ -136,10 +136,12 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
                         flag = True
                 os.chdir(APPDIR)
                 if flag == True:
+                    self.currentskin = os.path.basename(os.path.dirname(f"{skin_path}/skin.ini"))
+                    self.save_skincursor()
                     if len(self.currentskin) >= 10:
-                        self.currentskin = os.path.basename(os.path.dirname(f"{skin_path}/skin.ini"))
-                        self.save_skincursor()
-                        currentskin = f' ...{self.currentskin[:10]}'
+                        currentskin = f'{self.currentskin[:10]}...'
+                    else:
+                        currentskin = self.currentskin
                     self.label2.configure(text=currentskin)
                     cur.execute("INSERT INTO currskin VALUES (?)", (self.currentskin, ))
                     conn.commit()

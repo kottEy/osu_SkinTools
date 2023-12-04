@@ -75,7 +75,9 @@ class CollectionFrame(customtkinter.CTkFrame):
         file_name = {'cursor.png',
                      'cursor@2x.png',
                      'cursortrail.png',
-                     'cursortrail@2x.png'
+                     'cursortrail@2x.png',
+                     'cursormiddle.png',
+                     'cursormiddle@2x.png'
                     }
         for f in file_name:
             try:
@@ -98,7 +100,9 @@ class CollectionFrame(customtkinter.CTkFrame):
         file_name = {'cursor.png',
                      'cursor@2x.png',
                      'cursortrail.png',
-                     'cursortrail@2x.png'
+                     'cursortrail@2x.png',
+                     'cursormiddle.png',
+                     'cursormiddle@2x.png'
                     }
         for f in file_name:
             try:
