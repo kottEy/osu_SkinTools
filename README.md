@@ -12,5 +12,5 @@ osu!のSkinをGUIでいじれるツールです。
 - Pyinstallerを使用してexe化しているので、一部環境でマルウェアとして認識される可能性があります。
     
 ## Download
-osu_SkinTools.zipをダウンロードし、展開してからosu_SkinTools.exeを起動してください。  
+osu_SkinTools.zipをダウンロードし、展開してください。  
 [v1.4] https://github.com/kottEy/osu_SkinTools/releases/tag/v1.4
