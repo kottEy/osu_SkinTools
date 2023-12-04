@@ -56,8 +56,11 @@ class CursorFrame(customtkinter.CTkFrame):
             self.button_apply.grid(row=4, column=0, pady=(0, 10))
 
         if self.type == 'cursortrail':
-            self.checkbox_cursormiddle = customtkinter.CTkCheckBox(self, text="enable cursormiddle", font=(FONT_TYPE, 11), checkbox_width=15, checkbox_height=15, height=14, variable=tk.BooleanVar(self, False), onvalue=True, offvalue=False)
-            self.checkbox_cursormiddle.grid(row=2, column=1, pady=(20, 0))
+            self.checkbox_cursormiddle = customtkinter.CTkCheckBox(self, text="", font=(FONT_TYPE, 11), checkbox_width=16, checkbox_height=16, width=0, height=0, variable=tk.BooleanVar(self, False), onvalue=True, offvalue=False)
+            self.checkbox_cursormiddle.grid(row=0, column=1 , sticky="e")
+
+            self.label3 = customtkinter.CTkLabel(self, text="enable cursormiddle", font=(FONT_TYPE, 10))
+            self.label3.grid(row=0, column=2, sticky="w")
 
         self.button_apply = customtkinter.CTkButton(self, text="Apply", command=self.apply)
         self.button_apply.grid(row=4, column=1, pady=(0, 10))
