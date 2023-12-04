@@ -105,7 +105,9 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
         file_name = {f'{osu_dir}Skins\\{self.currentskin}\\cursor.png',
                         f'{osu_dir}Skins\\{self.currentskin}\\cursor@2x.png',
                         f'{osu_dir}Skins\\{self.currentskin}\\cursortrail.png', 
-                        f'{osu_dir}Skins\\{self.currentskin}\\cursortrail@2x.png'} 
+                        f'{osu_dir}Skins\\{self.currentskin}\\cursortrail@2x.png',
+                        f'{osu_dir}Skins\\{self.currentskin}\\cursormiddle.png',
+                        f'{osu_dir}Skins\\{self.currentskin}\\cursormiddle@2x.png'} 
         for f in file_name:
             try:
                 shutil.copy(f, f'./images/{self.currentskin}/')
