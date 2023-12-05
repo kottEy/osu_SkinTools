@@ -13,15 +13,15 @@ APPDIR = os.getcwd()
 
 
 class CollectionFrame(customtkinter.CTkFrame):
-    def __init__(self, *args, header_name="Collection", **kwargs):
+    def __init__(self, *args, header_name="Collection", osu_dir, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fonts = (FONT_TYPE, 15)
         self.header_name = header_name
-        cur.execute('SELECT path FROM client')
-        for r in cur:
-            self.osu_dir = r[0]
+        self.osu_dir = osu_dir
         self.setup_form()
+
+
     def setup_form(self):
         # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(1, weight=1)

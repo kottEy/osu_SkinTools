@@ -14,15 +14,13 @@ APPDIR = os.getcwd()
 
 
 class CursorFrame(customtkinter.CTkFrame):
-    def __init__(self, *args, header_name="Cursor", type="cursor", **kwargs):
+    def __init__(self, *args, header_name="Cursor", osu_dir, type="cursor", **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fonts = (FONT_TYPE, 15)
         self.type = type
         self.header_name = header_name
-        cur.execute('SELECT path FROM client')
-        for r in cur:
-            self.osu_dir = r[0]
+        self.osu_dir = osu_dir
         self.setup_form()
 
 

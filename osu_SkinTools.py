@@ -55,18 +55,18 @@ class App(customtkinter.CTk):
         # 列方向のマスのレイアウト設定
         self.grid_columnconfigure(1, weight=1)
 
-        Osu.get_osudir(self)
+        osu_dir = Osu.get_osudir(self)
 
-        self.read_current_skin_frame = CurrentSkinFrame(master=self, header_name="Current skin")
+        self.read_current_skin_frame = CurrentSkinFrame(master=self, header_name="Current skin", osu_dir=osu_dir)
         self.read_current_skin_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
-        self.read_collection = CollectionFrame(master=self, header_name="Collection")
+        self.read_collection = CollectionFrame(master=self, header_name="Collection", osu_dir=osu_dir)
         self.read_collection.grid(row=0, column=1, padx=20, pady=20, sticky="nsew")
 
-        self.read_cursor_frame = CursorFrame(master=self, header_name="Cursor", type="cursor")
+        self.read_cursor_frame = CursorFrame(master=self, header_name="Cursor", type="cursor", osu_dir=osu_dir)
         self.read_cursor_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
         
-        self.read_cursortrail_frame = CursorFrame(master=self, header_name="Cursortrail", type="cursortrail")
+        self.read_cursortrail_frame = CursorFrame(master=self, header_name="Cursortrail", type="cursortrail", osu_dir=osu_dir)
         self.read_cursortrail_frame.grid(row=1, column=1, padx=20, pady=20, sticky="nsew")
 
         self.read_addcursor_frame = AddCursorFrame(master=self, header_name="Add cursor", type="cursor")
