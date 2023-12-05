@@ -13,8 +13,8 @@ APPDIR = os.getcwd()
 class AddCursorFrame(customtkinter.CTkFrame, TkinterDnD.DnDWrapper):
     def __init__(self, *args, header_name="Add cursor", type="cursor", **kwargs):
         super().__init__(*args, **kwargs)
+        
         self.TkdndVersion = TkinterDnD._require(self)
-
         self.fonts = (FONT_TYPE, 15)
         self.header_name = header_name
         self.type = type
