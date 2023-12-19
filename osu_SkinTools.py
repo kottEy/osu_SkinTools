@@ -99,7 +99,7 @@ class App(customtkinter.CTk):
         self.read_addhitsound_frame.grid(row=0, column=1, padx=20, pady=20, sticky="nsew")
 
         self.read_mode_frame2 = ChangeModeFrame(master=self.page_hitsounds)
-        self.read_mode_frame2.grid(row=1, column=2, padx=(0, 20), pady=(109, 0))
+        self.read_mode_frame2.grid(row=1, column=2, padx=(0, 20), pady=(106, 0))
 
         self.page_cursor.tkraise()
 
