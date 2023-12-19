@@ -28,7 +28,7 @@ class CursorFrame(customtkinter.CTkFrame):
         # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(1, weight=1)
         # 列方向のマスのレイアウト設定
-        self.grid_columnconfigure(4, weight=1)
+        self.grid_columnconfigure(3, weight=1)
 
         # ラベルを表示
         self.label = customtkinter.CTkLabel(self, text=self.header_name, font=(FONT_TYPE, 11))
@@ -38,9 +38,9 @@ class CursorFrame(customtkinter.CTkFrame):
 
         try:
             self.image = customtkinter.CTkImage(light_image=Image.open(fp=self.file_array[0]), size=[100, 100])
-            self.label2 = customtkinter.CTkLabel(self, image=self.image, text="")
+            self.label2 = customtkinter.CTkLabel(self, height=155, image=self.image, text="")
         except:
-            self.label2 = customtkinter.CTkLabel(self, text="")
+            self.label2 = customtkinter.CTkLabel(self, height=155, text="")
         self.label2.grid(row=1, column=1, padx=20, sticky="nsew")
 
         self.button_left = customtkinter.CTkButton(self, text="<", fg_color="#444", hover_color="#333", height=50, width=50, command=self.left_cursor)
@@ -51,7 +51,7 @@ class CursorFrame(customtkinter.CTkFrame):
 
         if self.type == 'cursor':
             self.button_apply = customtkinter.CTkButton(self, text="⟲", width=50, height=28, command=self.apply_default)
-            self.button_apply.grid(row=4, column=0, pady=(0, 10))
+            self.button_apply.grid(row=3, column=0, pady=(0, 10))
 
         if self.type == 'cursortrail':
             self.checkbox_cursormiddle = customtkinter.CTkCheckBox(self, text="", font=(FONT_TYPE, 11), checkbox_width=16, checkbox_height=16, width=0, height=0, variable=tk.BooleanVar(self, False), onvalue=True, offvalue=False)
@@ -61,13 +61,13 @@ class CursorFrame(customtkinter.CTkFrame):
             self.label3.grid(row=0, column=2, sticky="w")
 
         self.button_apply = customtkinter.CTkButton(self, text="Apply", command=self.apply)
-        self.button_apply.grid(row=4, column=1, pady=(0, 10))
+        self.button_apply.grid(row=3, column=1, pady=(0, 10))
 
         self.button_apply = customtkinter.CTkButton(self, text="@2x", fg_color="#444", hover_color="#333", command=self.apply2x)
-        self.button_apply.grid(row=3, column=1, pady=(10, 10))
+        self.button_apply.grid(row=2, column=1, pady=(10, 10))
 
         self.button_delete2x = customtkinter.CTkButton(self, text="🗑", fg_color="#700", hover_color="#400", width=50, height=28, command=self.delete2x)
-        self.button_delete2x.grid(row=4, column=2, pady=(0, 10))
+        self.button_delete2x.grid(row=3, column=2, pady=(0, 10))
 
 
     def apply_default(self):

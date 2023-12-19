@@ -40,7 +40,7 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
             self.currentskin = self.currentskin[:10]
             self.currentskin += ' ...'
 
-        self.label2 = customtkinter.CTkLabel(self, text=self.currentskin, font=(FONT_TYPE, 15))
+        self.label2 = customtkinter.CTkLabel(self, width=105, text=self.currentskin, font=(FONT_TYPE, 15))
         self.label2.grid(row=1, column=0, padx=20, sticky="w")
 
         self.button_select = customtkinter.CTkButton(self, text="Select from Explorer", fg_color="#444", hover_color="#333", command=self.btn_select_callback)
@@ -51,9 +51,6 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
 
 
     def get_currskin(self):
-        dbname = 'osu_dir.db'
-        conn = sqlite3.connect(dbname)
-        cur = conn.cursor()
         # osuフォルダのディレクトリを取得
         try:
             cur.execute("SELECT path FROM client")
@@ -87,10 +84,14 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
         conn.commit()
         self.currentskin = self.get_currskin()
         self.save_skincursor()
+        currentskin = self.currentskin[:10]
         if len(self.currentskin) >= 10:
             currentskin = self.currentskin[:10]
             currentskin += ' ...'
+        else:
+            currentskin = self.currentskin
         self.label2.configure(text=currentskin)
+        self.sync_currskin(curr_skin=currentskin)
         self.label2.grid(row=1, column=0, padx=20, sticky="w")
 
 
@@ -143,7 +144,15 @@ class CurrentSkinFrame(customtkinter.CTkFrame):
                     else:
                         currentskin = self.currentskin
                     self.label2.configure(text=currentskin)
+                    self.sync_currskin(curr_skin=currentskin)
                     cur.execute("INSERT INTO currskin VALUES (?)", (self.currentskin, ))
                     conn.commit()
                 else:
                     tk.messagebox.showerror(title="Skin Tools", message="Failed to get skin")
+
+
+    def sync_currskin(self, curr_skin):
+        self.master.master.children['!ctkframe'].children['!currentskinframe'].label2.configure(text=curr_skin)
+        self.master.master.children['!ctkframe2'].children['!currentskinframe'].label2.configure(text=curr_skin)
+        pass
+        

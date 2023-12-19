@@ -28,8 +28,8 @@ class CollectionFrame(customtkinter.CTkFrame):
         # 列方向のマスのレイアウト設定
         self.grid_columnconfigure(0, weight=1)
 
-        self.tabview = customtkinter.CTkTabview(master=self, height=30)
-        self.tabview.grid(row=1, column=0, padx=20, pady=(0, 10))
+        self.tabview = customtkinter.CTkTabview(master=self, width=250, height=30)
+        self.tabview.grid(row=1, column=0, padx=20, pady=(0, 10), sticky="e")
 
         self.tabview.add("選択")
         self.tabview.add("追加")
@@ -45,14 +45,14 @@ class CollectionFrame(customtkinter.CTkFrame):
         self.combobox.grid(row=1, column=0, padx=20, sticky="ew")
 
         self.button_apply = customtkinter.CTkButton(self.tabview.tab("選択"), text="Apply", fg_color="#444", width=50, state='readonly', command=self.apply_collection)
-        self.button_apply.grid(row=1, column=1, padx=20, pady=5, sticky="w")
+        self.button_apply.grid(row=1, column=1, padx=(20, 10), pady=5, sticky="w")
 
         # Addタブ
         self.entry_add = customtkinter.CTkEntry(self.tabview.tab("追加"), width=150, height=28)
         self.entry_add.grid(row=1, column=0, padx=20, sticky="ew")
 
         self.button_add = customtkinter.CTkButton(self.tabview.tab("追加"), text="Add", width=50, command=self.add_collection)
-        self.button_add.grid(row=1, column=1, padx=20, pady=5, sticky="w")
+        self.button_add.grid(row=1, column=1, padx=(20, 10), pady=5, sticky="w")
 
 
     def combobox_callback(self, choice):
