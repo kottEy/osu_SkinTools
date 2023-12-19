@@ -13,4 +13,4 @@ osu!のSkinをGUIでいじれるツールです。
     
 ## Download
 osu_SkinTools.zipをダウンロードし、展開してください。  
-[v1.4.1] https://github.com/kottEy/osu_SkinTools/releases/tag/v1.4.1
+[v1.5.1] https://github.com/kottEy/osu_SkinTools/releases/tag/v1.5.1
