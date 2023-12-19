@@ -105,10 +105,6 @@ class HitSoundsFrame(customtkinter.CTkFrame):
                 pass
         for f in files:
             try:
-                os.remove(f'{osu_dir}Skins\\{curr_skin}\\{os.path.split(f)[1]}')
-            except:
-                pass
-            try:
                 shutil.copy(f'./hitsounds/{self.choice}/{os.path.split(f)[1]}', f'{osu_dir}Skins\\{curr_skin}\\{os.path.split(f)[1]}')
             except:
                 pass
