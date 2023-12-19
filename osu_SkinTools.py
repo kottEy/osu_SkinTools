@@ -50,9 +50,9 @@ class App(customtkinter.CTk):
         customtkinter.set_default_color_theme("blue")
 
         # フォームサイズ設定
-        self.geometry("770x600")
-        self.maxsize(770, 600)
-        self.minsize(770, 600)
+        self.geometry("777x600")
+        self.maxsize(777, 600)
+        self.minsize(777, 600)
         self.title("osu! Skin Tools")
         # 行方向のマスのレイアウト設定
         self.grid_rowconfigure(0, weight=1)
