@@ -22,7 +22,7 @@ class ChangeModeFrame(customtkinter.CTkFrame):
 
         self.button_mode1 = customtkinter.CTkButton(self, text="●", width=28, fg_color="#444", hover_color="#333", command=lambda : self.change_page(self.master.master.page_cursor))
         self.button_mode1.grid(row=0, column=0, pady=10)
-        self.button_mode2 = customtkinter.CTkButton(self, text="●", width=28, fg_color="#444", hover_color="#333", command=lambda : self.change_page(self.master.master.page_hitsounds))
+        self.button_mode2 = customtkinter.CTkButton(self, text="♪", width=28, fg_color="#444", hover_color="#333", command=lambda : self.change_page(self.master.master.page_hitsounds))
         self.button_mode2.grid(row=1, column=0, pady=10)
 
     
