@@ -2,6 +2,7 @@ import os
 import glob
 import sqlite3
 import shutil
+import tkinter as tk
 import customtkinter
 
 
@@ -48,9 +49,15 @@ class HitSoundsFrame(customtkinter.CTkFrame):
         self.button_apply = customtkinter.CTkButton(self.tabview.tab("選択"), text="Apply", fg_color="#444", width=50, state='readonly', command=self.apply_hitsounds)
         self.button_apply.grid(row=1, column=1, padx=(20, 10), pady=5, sticky="w")
 
-        # Add
-        self.button_add = customtkinter.CTkButton(self.tabview.tab("追加"), width=231, text="Add hitsounds from current skin", command=self.add_hitsounds)
-        self.button_add.grid(row=1, column=0, padx=20, pady=5, sticky="nsew")
+        # Addタブ
+        self.entry = customtkinter.CTkEntry(self.tabview.tab("追加"), placeholder_text="", state="readonly",width=126)
+        self.entry.grid(row=1, column=0, padx=(20, 0), sticky="ew")
+
+        self.button_select = customtkinter.CTkButton(self.tabview.tab("追加"), width=40, text="Open", fg_color="#444", hover_color="#333", command=self.btn_select_callback)
+        self.button_select.grid(row=1, column=1, padx=(0, 20), sticky="w")
+
+        self.button_add = customtkinter.CTkButton(self.tabview.tab("追加"), text="Add", fg_color="#444", width=50, state="readonly", command=self.add_hitsounds)
+        self.button_add.grid(row=1, column=2, padx=(0, 10), pady=5, sticky="w")
 
 
     def combobox_callback(self, choice):
@@ -58,27 +65,50 @@ class HitSoundsFrame(customtkinter.CTkFrame):
         self.choice = choice
 
 
+    def select_hitsounds(self):
+        hitsounds_path = tk.filedialog.askdirectory(initialdir = self.osu_dir)
+        if len(hitsounds_path) != 0:
+            return hitsounds_path
+        else:
+            # ファイル選択がキャンセルされた場合
+            return None
+        
+    
+    def btn_select_callback(self):
+            self.hs_path = self.select_hitsounds()
+            if self.hs_path != None:
+                text = str(os.path.split(self.hs_path)[1])
+                self.entry.configure(state="normal", placeholder_text=text)
+                self.entry.configure(state="readonly")
+                self.button_add.configure(state="normal", fg_color='#1f6AA5')
+    
+
     def add_hitsounds(self):
-        cur.execute('SELECT name FROM currskin')
-        for r in cur:
-            curr_skin = r[0]
         try:
-            os.makedirs(f"./hitsounds/{curr_skin}")
+            self.hs_path
         except:
-            pass
-        osu_dir = str(self.osu_dir).replace('osu!.exe', '')
-        types = ('mp3', 'wav', 'ogg')
-        files = []
-        for t in types:
-            files +=  glob.glob(fr"{osu_dir}Skins/{curr_skin}/*-hit*.*" + t)
-            files +=  glob.glob(fr"{osu_dir}Skins/{curr_skin}/*-slider*.*" + t)
-        for f in files:
+            return
+        
+        if self.hs_path != None:
             try:
-                shutil.copy(f'{osu_dir}Skins\\{curr_skin}\\{os.path.split(f)[1]}', f'./hitsounds/{curr_skin}/{os.path.split(f)[1]}')
+                os.makedirs(f"./hitsounds/{os.path.split(self.hs_path)[1]}")
             except:
                 pass
-        self.get_hitsounds()
-        self.combobox.configure(values=self.hitsounds_array)
+            types = ('mp3', 'wav', 'ogg')
+            files = []
+            for t in types:
+                files +=  glob.glob(fr"{self.hs_path}/*-hit*.*" + t)
+                files +=  glob.glob(fr"{self.hs_path}/*-slider*.*" + t)
+            for f in files:
+                try:
+                    shutil.copy(f, f'./hitsounds/{os.path.split(self.hs_path)[1]}/{os.path.split(f)[1]}')
+                except:
+                    pass
+            self.get_hitsounds()
+            self.combobox.configure(values=self.hitsounds_array)
+            self.entry.configure(state="normal", placeholder_text="")
+            self.entry.configure(state="readonly")
+            self.button_add.configure(state="readonly", fg_color='#444')
                     
 
     def apply_hitsounds(self):
